@@ -4,12 +4,18 @@ package com.example.johnsond.popularmovies;
  * Created by JohnsonD on 7/27/15.
  */
 public class MovieItem {
-    private  String OriginalTitle="";
+    private  String OriginalTitle;
     private  int MovieImage;
-    private  String Url="";
-    private  String Description=""; //called overview in themovieapi
-    private  String UserRating=""; //called vote_averge in themovieapi
-    private  String ReleaseDate="";
+    private  String OverView; //called overview in themovieapi
+    private  String VoteAverage; //called vote_averge in themovieapi
+    private  String VoteCount;
+    private  String ReleaseDate;
+
+    public MovieItem  (int movieImage) {
+        this.MovieImage = movieImage;
+    }
+
+    public MovieItem (){}
 
     //*********** Set Methods ******************//
 
@@ -18,29 +24,29 @@ public class MovieItem {
         this.OriginalTitle = OriginalTitle;
     }
 
-    public void setMovieImage(int MovieImage)
+    public void setMovieImage(int movieImage)
     {
-        this.MovieImage = MovieImage;
+        this.MovieImage = movieImage;
     }
 
-    public void setUrl(String Url)
+    public void setOverView(String overView)
     {
-        this.Url = Url;
+        this.OverView = overView;
     }
 
-    public void setDescription(String description)
+    public void setVoteAverage(String voteAverage)
     {
-        Description = description;
+        this.VoteAverage = voteAverage;
     }
 
-    public void setUserRating(String userRating)
+    public void setVoteCount(String voteCount)
     {
-        UserRating = userRating;
+        this.VoteCount = voteCount;
     }
 
     public void setReleaseDate(String releaseDate)
     {
-        ReleaseDate = releaseDate;
+        this.ReleaseDate = releaseDate;
     }
 
     //*********** Get Methods ****************//
@@ -52,19 +58,19 @@ public class MovieItem {
 
     public int getMovieImage() { return MovieImage; }
 
-    public String getUrl()
+    public String getOverView()
     {
-        return Url;
+        return OverView;
     }
 
-    public String getDescription()
+    public String getVoteAverageg()
     {
-        return Description;
+        return VoteAverage;
     }
 
-    public String getUserRating()
+    public String getVoteCount()
     {
-        return UserRating;
+        return VoteCount;
     }
 
     public String getReleaseDate()
