@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Format for the Gridview displaying the movies pulled from "theMovieDB.com" database-->
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/gridViewMovies"
     android:layout_width="match_parent"

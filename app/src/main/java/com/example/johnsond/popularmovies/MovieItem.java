@@ -5,26 +5,25 @@ package com.example.johnsond.popularmovies;
  */
 public class MovieItem {
     private  String OriginalTitle;
-    private  int MovieImage;
+    private  String MovieImage;
     private  String OverView; //called overview in themovieapi
     private  String VoteAverage; //called vote_averge in themovieapi
     private  String VoteCount;
     private  String ReleaseDate;
 
-    public MovieItem  (int movieImage) {
-        this.MovieImage = movieImage;
-    }
+    //*********** Constructor Methods ******************//
+    public MovieItem  (String movieImage) { this.MovieImage = movieImage;}
 
     public MovieItem (){}
 
-    //*********** Set Methods ******************//
+    //*********** Setter Methods ******************//
 
     public void setOriginalTitle(String OriginalTitle)
     {
         this.OriginalTitle = OriginalTitle;
     }
 
-    public void setMovieImage(int movieImage)
+    public void setMovieImage(String movieImage)
     {
         this.MovieImage = movieImage;
     }
@@ -49,21 +48,21 @@ public class MovieItem {
         this.ReleaseDate = releaseDate;
     }
 
-    //*********** Get Methods ****************//
+    //*********** Getter Methods ****************//
 
     public String getOriginalTitle()
     {
         return OriginalTitle;
     }
 
-    public int getMovieImage() { return MovieImage; }
+    public String getMovieImage() { return MovieImage; }
 
     public String getOverView()
     {
         return OverView;
     }
 
-    public String getVoteAverageg()
+    public String getVoteAverage()
     {
         return VoteAverage;
     }

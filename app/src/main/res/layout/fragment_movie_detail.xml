@@ -1,0 +1,126 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="16dp"
+    android:paddingLeft="16dp"
+    tools:context="com.example.johnsond.popularmovies.MovieDetailActivityFragment">
+
+    <!--Layout for the selected movie image shown in the detail activity -->
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="180dp"
+        android:id="@+id/movie_detail_imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:elevation="10dp"
+        android:layout_marginBottom="4dp"
+        />
+
+    <!--Format for the title of the selected movie, shown in the detail activity-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_detail_origional_title_view"
+        android:layout_below="@+id/movie_detail_imageView"
+        android:paddingBottom="2dp"
+        android:text="placeholder"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#607D8B" />
+
+    <!--Label for the votes of the selected movie, shown in the detail activity-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_detail_vote_label"
+        android:layout_below="@+id/movie_detail_origional_title_view"
+        android:paddingBottom="2dp"
+        android:text="Vote: "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <!--Format for the rating value of the selected movie, highlighted stars will be shown in the detail activity-->
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_detail_ratingBar"
+        android:stepSize="0.5"
+        android:numStars="5"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_marginTop="4.5dp"
+        android:layout_below="@+id/movie_detail_origional_title_view"
+        android:layout_toRightOf="@+id/movie_detail_vote_label"
+        android:layout_toEndOf="@+id/movie_detail_vote_label" />
+
+    <!--Format for the amount of votes counted to the selected movie, shown in the detail activity-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_detail_vote_count"
+        android:layout_below="@+id/movie_detail_origional_title_view"
+        android:paddingBottom="2dp"
+        android:paddingLeft="8dp"
+        android:text="placeholder"
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/movie_detail_ratingBar"
+        />
+
+    <!--Format for the label displaying release date for the selected movie, shown in the detail activity-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_detail_release_date_label"
+        android:layout_below="@+id/movie_detail_vote_label"
+        android:paddingBottom="2dp"
+        android:text="Release Date: "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <!--Format for the release date of the selected movie, shown in the detail activity-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_detail_release_date"
+        android:layout_below="@+id/movie_detail_vote_label"
+        android:layout_toRightOf="@+id/movie_detail_release_date_label"
+        android:paddingBottom="2dp"
+        android:text="placeholder"
+        android:textSize="20sp"
+        />
+
+    <!--Format for the overview label of the selected movie, shown in the detail activity-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_detail_overview_label"
+        android:layout_below="@+id/movie_detail_release_date_label"
+
+        android:text="Overview: "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <!--ScrollView was added to allow the user to scroll through off-screen information, shown in the detail activity-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/movie_detail_overview_label"
+        android:layout_centerHorizontal="true">
+
+        <!--Format for the entire overview of the selected movie, shown in the detail activity-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_detail_overview"
+        android:layout_below="@+id/movie_detail_overview_label"
+        android:text="placeholder"
+        android:textSize="20sp"
+        />
+    </ScrollView>
+
+</RelativeLayout>

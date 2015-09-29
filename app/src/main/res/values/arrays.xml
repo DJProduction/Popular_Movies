@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Array holding the labels that will be used in the Movie Settings Activity for sorting movies-->
+    <string-array name="pref_movieSort_options">
+        <item>@string/pref_movieSort_popular_movies_label</item>
+        <item>@string/pref_movieSort_highest_rated_label</item>
+    </string-array>
+
+    <!--Array holding the values for each selectable sort type that will offered in the Movie Settings Activity-->
+    <string-array name="pref_movieSort_values">
+        <item>@string/pref_movieSort_popular_movies</item>
+        <item>@string/pref_movieSort_highest_rated</item>
+    </string-array>
+
+</resources>
