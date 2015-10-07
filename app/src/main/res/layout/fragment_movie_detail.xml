@@ -1,3 +1,10 @@
+<!--ScrollView was added to allow the user to scroll through off-screen information, shown in the detail activity-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_below="@+id/movie_detail_overview_label"
+    android:layout_centerHorizontal="true">
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +15,7 @@
     tools:context="com.example.johnsond.popularmovies.MovieDetailActivityFragment">
 
     <!--Layout for the selected movie image shown in the detail activity -->
+
     <ImageView
         android:layout_width="140dp"
         android:layout_height="180dp"
@@ -104,14 +112,6 @@
         android:textStyle="bold"
         />
 
-    <!--ScrollView was added to allow the user to scroll through off-screen information, shown in the detail activity-->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_below="@+id/movie_detail_overview_label"
-        android:layout_centerHorizontal="true">
-
         <!--Format for the entire overview of the selected movie, shown in the detail activity-->
     <TextView
         android:layout_width="wrap_content"
@@ -121,6 +121,7 @@
         android:text="placeholder"
         android:textSize="20sp"
         />
-    </ScrollView>
 
 </RelativeLayout>
+
+</ScrollView>

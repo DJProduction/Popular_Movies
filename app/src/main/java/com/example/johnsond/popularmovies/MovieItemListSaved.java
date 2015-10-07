@@ -4,9 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by JohnsonD on 7/27/15.
+ * Created by JohnsonD on 9/29/15.
  */
-public class MovieItem implements Parcelable {
+public class MovieItemListSaved implements Parcelable {
+
     private  String OriginalTitle;
     private  String MovieImage;
     private  String OverView; //called overview in themovieapi
@@ -15,9 +16,9 @@ public class MovieItem implements Parcelable {
     private  String ReleaseDate;
 
     //*********** Constructor Methods ******************//
-    public MovieItem  (String movieImage) { this.MovieImage = movieImage;}
+    public MovieItemListSaved  (String movieImage) { this.MovieImage = movieImage;}
 
-    public MovieItem (){}
+    public MovieItemListSaved (){}
 
     //*********** Setter Methods ******************//
 
@@ -81,7 +82,7 @@ public class MovieItem implements Parcelable {
     }
 
 
-    private MovieItem(Parcel in) {
+    private MovieItemListSaved(Parcel in) {
         OriginalTitle = in.readString();
         MovieImage = in.readString();
         OverView = in.readString();
@@ -103,14 +104,13 @@ public class MovieItem implements Parcelable {
         out.writeString(ReleaseDate);
     }
 
-    public static final Parcelable.Creator<MovieItem> CREATOR = new Parcelable.Creator<MovieItem>() {
-        public MovieItem createFromParcel(Parcel in) {
-            return new MovieItem(in);
+    public static final Parcelable.Creator<MovieItemListSaved> CREATOR = new Parcelable.Creator<MovieItemListSaved>() {
+        public MovieItemListSaved createFromParcel(Parcel in) {
+            return new MovieItemListSaved(in);
         }
 
-        public MovieItem[] newArray(int size) {
-            return new MovieItem[size];
+        public MovieItemListSaved[] newArray(int size) {
+            return new MovieItemListSaved[size];
         }
     };
-
 }

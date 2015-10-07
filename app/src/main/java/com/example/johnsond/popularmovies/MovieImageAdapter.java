@@ -1,6 +1,7 @@
 package com.example.johnsond.popularmovies;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +41,15 @@ public class MovieImageAdapter extends ArrayAdapter<MovieItem> {
         // Applies the images for current movies contained on the list.
         // Uses the Picasso Api for enhanced video loading
         ImageView movieImageView = (ImageView) convertView.findViewById(R.id.movieImageView);
-        Picasso.with(getContext())
-                .load(movieItem.getMovieImage())
-                .resize(300,500)
-                .centerCrop()
-                .into(movieImageView);
+        try {
+            Picasso.with(getContext())
+                    .load(movieItem.getMovieImage())
+                    .resize(300,500)
+                    .centerCrop()
+                    .into(movieImageView);
+        } catch (IllegalArgumentException e) {
+            movieImageView.setImageURI(Uri.parse(movieItem.getMovieImage()));
+        }
 
         return convertView;
     }

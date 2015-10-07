@@ -1,7 +1,10 @@
 package com.example.johnsond.popularmovies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +35,8 @@ import java.util.List;
  */
 public class MainActivityFragment extends Fragment {
 
+    //List of movieItems from FetchMovies() method that will be implemented into the movieImgAdapter
+    ArrayList<MovieItem> savedListOfMovies = new ArrayList<MovieItem>();
     // Adapter used in onCreatveView to capture files from themoviesdb.org and
     // add to a xml fragment_main gridViewMovie
     private MovieImageAdapter movieImgAdapter;
@@ -41,6 +46,7 @@ public class MainActivityFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         // Add this line in order for this fragment to handle menu events.
         setHasOptionsMenu(true);
     }
@@ -52,11 +58,14 @@ public class MainActivityFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        //List of movieItems from FetchMovies() method that will be implemented into the movieImgAdapter
-        List<MovieItem> moviesList = new ArrayList<MovieItem>();
+        // recovers current list state when activity has ended
+        if (savedInstanceState != null) {
+            //(ArrayList<MovieItem>)
+            savedListOfMovies = (ArrayList<MovieItem>) savedInstanceState.get("MOVIE_KEY");
+        }
 
         // movieImgAdapter will receive movies from movieList and apply them to the GridView
-        movieImgAdapter = new MovieImageAdapter(getActivity(), moviesList);
+        movieImgAdapter = new MovieImageAdapter(getActivity(), savedListOfMovies);
         final GridView gridview = (GridView) rootView.findViewById(R.id.gridViewMovies);
         gridview.setAdapter(movieImgAdapter);
 
@@ -84,16 +93,36 @@ public class MainActivityFragment extends Fragment {
     // Fragment starts initiate update method
     public void onStart() {
         super.onStart();
-        updateMovieList();
+        if (isNetworkAvailable()) {
+            updateMovieList();
+        }
+        else{
+            Log.e("NetworkCheck", "Device not connected to internet");
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("MOVIE_KEY", savedListOfMovies);
     }
 
     //FetchMovies task is started and the sorting preference chosen from Settings Activity is passed into the method
     private void updateMovieList() {
         FetchMovies asyncGetMovies = new FetchMovies();
-        SharedPreferences sort= PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences sort = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String pref_movieSort = sort.getString(getString(R.string.pref_movieSort_key),
                 getString(R.string.pref_movieSort_popular_movies));
         asyncGetMovies.execute(pref_movieSort);
+    }
+
+    //Based on a stackoverflow snippet
+    //Checks network is available in onStart() before FetchMovies is even initiated
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     public class FetchMovies extends AsyncTask<String, Void, List<MovieItem>> {
@@ -103,7 +132,7 @@ public class MainActivityFragment extends Fragment {
         /**
          * Take the String representing the resulting movies from the query in JSON Format and
          * pull out the data we need to construct the Strings needed for the wireframes.
-         *
+         * <p/>
          * Each movie has its information parsed and entered into the movieList
          */
 
@@ -124,12 +153,12 @@ public class MainActivityFragment extends Fragment {
 
             List<MovieItem> movieList = new ArrayList<MovieItem>();
 
-            for(int i=0; i < moviesArray.length(); i++) {
+            for (int i = 0; i < moviesArray.length(); i++) {
                 JSONObject movieSpecific = moviesArray.getJSONObject(i);
                 MovieItem movie = new MovieItem();
 
                 movie.setOriginalTitle(movieSpecific.getString(OWM_ORIGIONAL_TITLE));
-                movie.setMovieImage("http://image.tmdb.org/t/p/w300"+movieSpecific.getString(OWM_MOVIE_IMAGE));
+                movie.setMovieImage("http://image.tmdb.org/t/p/w300" + movieSpecific.getString(OWM_MOVIE_IMAGE));
                 movie.setOverView(movieSpecific.getString(OWM_OVERVIEW));
                 movie.setVoteCount(movieSpecific.getString(OWN_VOTE_COUNT));
                 movie.setVoteAverage(movieSpecific.getString(OWM_VOTE_AVERAGE));
@@ -147,9 +176,9 @@ public class MainActivityFragment extends Fragment {
         // Prefs is based on which value user selected in settings menu "popular movies" or "highest rated"
         // Uri query is built based on the prefs value selected
         // Default uri sorting query is "popular movies"
-        private Uri buildBasedOnPreferences (String prefs) {
+        private Uri buildBasedOnPreferences(String prefs) {
             Uri buildUri;
-            if(prefs == getString(R.string.pref_movieSort_popular_movies)) {
+            if (prefs == getString(R.string.pref_movieSort_popular_movies)) {
                 final String MOVIE_QUERY_BASE_URL =
                         "https://api.themoviedb.org/3";
                 final String DISCOVER_PATH = "discover";
@@ -160,15 +189,14 @@ public class MainActivityFragment extends Fragment {
                 String api_key = getString(R.string.api_Key);
                 String sort = "popularity.desc";
 
-               Uri builtUri = Uri.parse(MOVIE_QUERY_BASE_URL).buildUpon()
+                Uri builtUri = Uri.parse(MOVIE_QUERY_BASE_URL).buildUpon()
                         .appendPath(DISCOVER_PATH)
                         .appendPath(MOVIE_PATH)
                         .appendQueryParameter(SORT_PARAM, sort)
                         .appendQueryParameter(API_KEY_PARAM, api_key)
                         .build();
                 return builtUri;
-            }
-            else if(prefs == getString(R.string.pref_movieSort_highest_rated)) {
+            } else if (prefs == getString(R.string.pref_movieSort_highest_rated)) {
                 final String MOVIE_QUERY_BASE_URL =
                         "https://api.themoviedb.org/3";
                 final String DISCOVER_PATH = "discover";
@@ -186,15 +214,13 @@ public class MainActivityFragment extends Fragment {
                         .appendQueryParameter(API_KEY_PARAM, api_key)
                         .build();
                 return builtUri;
-            }
-
-            else {
+            } else {
                 buildUri = Uri.parse(getString(R.string.default_uri_build)).buildUpon().build();
                 return buildUri;
             }
         }
 
-        protected List<MovieItem> doInBackground(String...params) {
+        protected List<MovieItem> doInBackground(String... params) {
 // These two need to be declared outside the try/catch
 // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
@@ -205,14 +231,14 @@ public class MainActivityFragment extends Fragment {
 
             try {
 
-                Uri buildUri  = buildBasedOnPreferences(params[0]);
+                Uri buildUri = buildBasedOnPreferences(params[0]);
 
-                    URL url = new URL(buildUri.toString());
+                URL url = new URL(buildUri.toString());
 
-                    // Create the request to OpenWeatherMap, and open the connection
-                    urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.setRequestMethod("GET");
-                    urlConnection.connect();
+                // Create the request to OpenWeatherMap, and open the connection
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.connect();
 
                 // Read the input stream into a String
                 InputStream inputStream = urlConnection.getInputStream();
@@ -270,14 +296,13 @@ public class MainActivityFragment extends Fragment {
         protected void onPostExecute(List<MovieItem> result) {
             if (result != null) {
                 movieImgAdapter.clear();
-                for( int i=0; i<result.size(); i++) {
+                for (int i = 0; i < result.size(); i++) {
                     movieImgAdapter.add(result.get(i));
                 }
             }
         }
 
-        }
-
-
-
     }
+
+
+}
