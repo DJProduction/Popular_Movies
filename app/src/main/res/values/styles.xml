@@ -5,4 +5,32 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- text styles for the movie details fragment that will be in bold -->
+    <style name="movie_details_text_bold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- text styles for the movie details fragment -->
+    <style name="movie_details_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- button styles for the movie details fragment -->
+    <style name="movie_details_button">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FAFAFA</item>
+        <item name="android:background">#607D8B</item>
+
+    </style>
+
+
 </resources>

@@ -18,6 +18,12 @@
     <!--Reference uri needed to query most popular movies-->
     <string name="default_uri_build">https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&amp;api_key=355114c318820d5787910ded3fe5a939</string>
 
+    <!--Reference uri needed to query most popular movies-->
+    <string name="default_uri_youtube">http://www.youtube.com/watch?v=</string>
+
+    <!--Reference chooser menu for intent trailer videos-->
+    <string name="chooser_trailer_title">Share video to</string>
+
     <!-- Label for movie sorting to ask for user preference -->
     <string name="pref_movieSort_label">Movie Sorted By</string>
 
@@ -35,4 +41,15 @@
 
     <!-- Value in SharedPreferences for popular movies sort selection  -->
     <string name="pref_movieSort_popular_movies" translatable="false">popular movies</string>
+
+    <!-- Value in Menu for favorite movie default button  -->
+    <string name="btn_label_favorite_default" translatable="false">favorite default</string>
+
+    <!-- Value in Menu for favorite movie selected button  -->
+    <string name="btn_label_favorite_selected" translatable="false">favorite selected</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_movie_reviews">MovieReviewsActivity</string>
+    <string name="hello_world">Hello world!</string>
 </resources>

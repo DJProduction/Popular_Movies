@@ -28,6 +28,16 @@
             android:name=".MovieSettingsActivity"
             android:label="@string/title_activity_movie_settings" >
         </activity>
+
+        <provider
+            android:name=".data.MovieContentProvider"
+            android:authorities="com.example.johnsond.popularmovies"
+            android:enabled="true"
+            android:exported="true"></provider>
+
+        <activity
+            android:name=".MovieReviewsActivity"
+            android:label="@string/title_activity_movie_reviews"></activity>
     </application>
 
 </manifest>

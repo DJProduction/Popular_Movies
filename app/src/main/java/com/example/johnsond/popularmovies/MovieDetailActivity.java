@@ -1,12 +1,15 @@
 package com.example.johnsond.popularmovies;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MovieDetailActivity extends AppCompatActivity {
+
+    // Used to change favorites icon
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_movie_detail, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -32,6 +36,12 @@ public class MovieDetailActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, MovieSettingsActivity.class));
+            return true;
+        }
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_favorite) {
+            item.setIcon(R.drawable.ic_favorite_movie_selected);
             return true;
         }
 

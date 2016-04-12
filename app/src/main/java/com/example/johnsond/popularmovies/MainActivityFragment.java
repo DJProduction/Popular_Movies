@@ -3,6 +3,7 @@ package com.example.johnsond.popularmovies;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+
+import com.example.johnsond.popularmovies.data.MovieContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +37,8 @@ import java.util.List;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+    SharedPreferences sort;
 
     //List of movieItems from FetchMovies() method that will be implemented into the movieImgAdapter
     ArrayList<MovieItem> savedListOfMovies = new ArrayList<MovieItem>();
@@ -64,6 +69,14 @@ public class MainActivityFragment extends Fragment {
             savedListOfMovies = (ArrayList<MovieItem>) savedInstanceState.get("MOVIE_KEY");
         }
 
+        //Preference sort extracted from MovieSettingsActivity
+        String prefSort = sort.getString(getString(R.string.pref_movieSort_key),
+                getString(R.string.pref_movieSort_popular_movies));
+        Uri weatherForLocationUri = MovieContract.MoviesEntry.buildMoviesWithPrefferedSort(prefSort);
+
+        Cursor cursorMovieList = getActivity().getContentResolver().query(weatherForLocationUri,
+                null, null, null, null);
+
         // movieImgAdapter will receive movies from movieList and apply them to the GridView
         movieImgAdapter = new MovieImageAdapter(getActivity(), savedListOfMovies);
         final GridView gridview = (GridView) rootView.findViewById(R.id.gridViewMovies);
@@ -77,6 +90,7 @@ public class MainActivityFragment extends Fragment {
                 MovieItem detailedMovie = movieImgAdapter.getItem(position);
 
                 Intent intent = new Intent(getActivity(), MovieDetailActivity.class)
+                        .putExtra("id", detailedMovie.getId())
                         .putExtra("origional_title", detailedMovie.getOriginalTitle())
                         .putExtra("movie_image", detailedMovie.getMovieImage())
                         .putExtra("release_date", detailedMovie.getReleaseDate())
@@ -110,7 +124,7 @@ public class MainActivityFragment extends Fragment {
     //FetchMovies task is started and the sorting preference chosen from Settings Activity is passed into the method
     private void updateMovieList() {
         FetchMovies asyncGetMovies = new FetchMovies();
-        SharedPreferences sort = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sort = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String pref_movieSort = sort.getString(getString(R.string.pref_movieSort_key),
                 getString(R.string.pref_movieSort_popular_movies));
         asyncGetMovies.execute(pref_movieSort);
@@ -141,6 +155,7 @@ public class MainActivityFragment extends Fragment {
 
             // These are the names of the JSON objects that need to be extracted.
             final String OWM_RESULTS = "results";
+            final String OWN_ID = "id";
             final String OWM_ORIGIONAL_TITLE = "original_title";
             final String OWM_MOVIE_IMAGE = "poster_path";
             final String OWM_OVERVIEW = "overview";
@@ -157,6 +172,7 @@ public class MainActivityFragment extends Fragment {
                 JSONObject movieSpecific = moviesArray.getJSONObject(i);
                 MovieItem movie = new MovieItem();
 
+                movie.setId(movieSpecific.getString(OWN_ID));
                 movie.setOriginalTitle(movieSpecific.getString(OWM_ORIGIONAL_TITLE));
                 movie.setMovieImage("http://image.tmdb.org/t/p/w300" + movieSpecific.getString(OWM_MOVIE_IMAGE));
                 movie.setOverView(movieSpecific.getString(OWM_OVERVIEW));
