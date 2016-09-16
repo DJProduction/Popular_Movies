@@ -1,59 +1,97 @@
 package com.example.johnsond.popularmovies;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.database.Cursor;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
-
 /**
  * Created by JohnsonD on 7/14/15.
  */
-public class MovieImageAdapter extends ArrayAdapter<MovieItem> {
+public class MovieImageAdapter extends CursorAdapter {
+
+    // Boolean used when checking the orientation of the device.
+    private boolean viewLandscape;
 
     // Adapter receives list of movies which information for each
-    public MovieImageAdapter(Activity context, List<MovieItem> movieItem) {
-        super (context, 0,movieItem);
+    public MovieImageAdapter(Activity context, Cursor movieCursor, int flags) {
+        super(context, movieCursor, flags);
     }
 
-    // Create a new ImageView - Movie Poster
-    // TextView - Movie Title
-    // For each item referenced from Uri query the Adapter
-    public View getView(int position, View convertView, ViewGroup parent) {
-        MovieItem movieItem = getItem(position);
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_movies, parent, false);
+    // Function used to check if the device is in landscape
+    // Use the context (activity) calling the configuration method to check the device's orientation.
+    public boolean checkOrientationLandscape(Context context) {
+        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return true;
+        } else {
+            return false;
         }
+    }
 
-        // Searches for the reference in the xml for the format of each movie title
-        // Applies the titles for current movies contained on the list.
-        TextView movieTitleView = (TextView) convertView.findViewById(R.id.movie_origional_title_view);
-        movieTitleView.setText(movieItem.getOriginalTitle());
+    // For each new view, attach view to movieViewHolder
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
 
-        // Searches for the reference in the xml for the format of each movie image
-        // Applies the images for current movies contained on the list.
-        // Uses the Picasso Api for enhanced video loading
-        ImageView movieImageView = (ImageView) convertView.findViewById(R.id.movieImageView);
+        View view = LayoutInflater.from(context).inflate(R.layout.list_movies, parent, false);
+        ViewHolder movieViewHolder = new ViewHolder(view);
+        view.setTag(movieViewHolder);
+
+        return view;
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+
+        ViewHolder movieViewHolder = (ViewHolder) view.getTag();
+        viewLandscape = checkOrientationLandscape(context);
+
+        // Holds the display height and width of the device
+        int width = context.getResources().getDisplayMetrics().widthPixels;
+        int height = context.getResources().getDisplayMetrics().heightPixels;
+
         try {
-            Picasso.with(getContext())
-                    .load(movieItem.getMovieImage())
-                    .resize(300,500)
-                    .centerCrop()
-                    .into(movieImageView);
+            // Check if device is in landscape
+            // if true make the height larger than the width
+            // This will make up for the fact the image is stretched landscape
+            if (viewLandscape) {
+                Picasso.with(context)
+                        .load(cursor.getString(MainActivityFragment.COL_MOVIE_IMAGE))
+                        .resize(width / 4, height / 2)
+                        .into(movieViewHolder.movieImageView);
+            } else {
+                Picasso.with(context)
+                        .load(cursor.getString(MainActivityFragment.COL_MOVIE_IMAGE))
+                        .resize(width / 4, height / 4)
+                        .into(movieViewHolder.movieImageView);
+            }
         } catch (IllegalArgumentException e) {
-            movieImageView.setImageURI(Uri.parse(movieItem.getMovieImage()));
+            movieViewHolder.movieImageView.setImageURI(Uri.parse(cursor.getString(MainActivityFragment.COL_MOVIE_IMAGE)));
         }
 
-        return convertView;
+        String movieTitle = cursor.getString(MainActivityFragment.COL_MOVIE_ORIGIONAL_TITLE);
+        movieViewHolder.movieTitleTextView.setText(movieTitle);
+
     }
 
+    // Cache of the children views for the movie gridView item.
+    public static class ViewHolder {
+        public final ImageView movieImageView;
+        public final TextView movieTitleTextView;
+
+        public ViewHolder(View view) {
+            movieImageView = (ImageView) view.findViewById(R.id.movieImageView);
+            movieTitleTextView = (TextView) view.findViewById(R.id.movie_origional_title_view);
+        }
+    }
 }
 
 
