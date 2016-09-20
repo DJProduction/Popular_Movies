@@ -77,12 +77,12 @@ public class MovieDetailActivityFragment extends Fragment implements LoaderManag
     private MenuItem favoriteMenuItem;
     // Will hold the values when the loader is finished getting information on the selected movie
     private int id;
-    private  String originalTitle;
-    private  String movieImage;
-    private  String overView;
-    private  String voteAverage;
+    private String originalTitle;
+    private String movieImage;
+    private String overView;
+    private String voteAverage;
     private int voteCount;
-    private  String releaseDate;
+    private String releaseDate;
     private String preferredSort;
     private String favorite;
     private String trailer;
@@ -97,7 +97,6 @@ public class MovieDetailActivityFragment extends Fragment implements LoaderManag
     private Button movieTrailerButton;
     private Button movieReviewsButton;
     private ImageButton movieFavoriteButton;
-
 
 
     public MovieDetailActivityFragment() {
@@ -325,7 +324,7 @@ public class MovieDetailActivityFragment extends Fragment implements LoaderManag
             // theMovieDB rates movies with 10 being maximum
             // So each rating had to be divided by 2
             // Float is used to incorporate half stars
-            float voteAverage_float=Float.parseFloat(voteAverage);
+            float voteAverage_float = Float.parseFloat(voteAverage);
             movieRatingBarView.setRating(voteAverage_float / 2);
 
             movieVoteCountView.setText(voteCount + " (votes)");

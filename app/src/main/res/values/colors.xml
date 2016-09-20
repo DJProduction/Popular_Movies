@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Represents the color of movie titles in the details fragment-->
+    <color name="detail_movie_title_color">#607D8B</color>
+    <color name="app_bar_color">#424242</color>
+    <color name="status_bar_color">#212121</color>
+</resources>

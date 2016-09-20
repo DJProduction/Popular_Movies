@@ -8,10 +8,10 @@
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    tools:context="com.example.johnsond.popularmovies.MovieDetailActivityFragment">
+        tools:context="com.example.johnsond.popularmovies.MovieDetailActivityFragment">
 
         <LinearLayout
             android:id="@+id/movie_detail_header"
@@ -21,140 +21,134 @@
 
             <!--Layout for the selected movie image shown in the detail activity -->
 
-    <ImageView
-        android:id="@+id/movie_detail_imageView"
-        android:layout_width="140dp"
-        android:layout_height="190dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="10dp"
-        android:elevation="10dp"
-        android:scaleType="fitXY" />
+            <ImageView
+                android:id="@+id/movie_detail_imageView"
+                android:layout_width="140dp"
+                android:layout_height="190dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="10dp"
+                android:elevation="10dp"
+                android:scaleType="fitXY" />
 
 
             <!--Format for the title of the selected movie, shown in the detail activity-->
-    <TextView
-        android:id="@+id/movie_detail_origional_title_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@+id/movie_detail_imageView"
-        android:layout_toRightOf="@+id/movie_detail_imageView"
-        android:background="@color/button_material_dark"
-        android:elevation="10dp"
-        android:gravity="bottom"
-        android:paddingBottom="6dp"
-        android:paddingLeft="6dp"
-        android:textColor="@color/abc_primary_text_material_dark"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/movie_detail_origional_title_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@+id/movie_detail_imageView"
+                android:layout_toRightOf="@+id/movie_detail_imageView"
+                android:background="@color/button_material_dark"
+                android:elevation="10dp"
+                android:gravity="bottom"
+                android:paddingBottom="6dp"
+                android:paddingLeft="6dp"
+                android:textColor="@color/abc_primary_text_material_dark"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
 
         <!--Label for the votes of the selected movie, shown in the detail activity-->
-    <TextView
-        android:id="@+id/movie_detail_vote_label"
-        style="@style/movie_details_text_bold"
-        android:layout_below="@+id/movie_detail_header"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:paddingBottom="2dp"
-        />
+        <TextView
+            android:id="@+id/movie_detail_vote_label"
+            style="@style/movie_details_text_bold"
+            android:layout_below="@+id/movie_detail_header"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="2dp" />
 
-    <!--Format for the rating value of the selected movie, highlighted stars will be shown in the detail activity-->
-    <RatingBar
-        android:id="@+id/movie_detail_ratingBar"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/movie_detail_header"
-        android:layout_marginTop="12.5dp"
-        android:layout_toEndOf="@+id/movie_detail_vote_label"
-        android:layout_toRightOf="@+id/movie_detail_vote_label"
-        android:numStars="5"
-        android:stepSize="0.5" />
+        <!--Format for the rating value of the selected movie, highlighted stars will be shown in the detail activity-->
+        <RatingBar
+            android:id="@+id/movie_detail_ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movie_detail_header"
+            android:layout_marginTop="12.5dp"
+            android:layout_toEndOf="@+id/movie_detail_vote_label"
+            android:layout_toRightOf="@+id/movie_detail_vote_label"
+            android:numStars="5"
+            android:stepSize="0.5" />
 
-    <!--Format for the amount of votes counted to the selected movie, shown in the detail activity-->
-    <TextView
-        android:id="@+id/movie_detail_vote_count"
-        style="@style/movie_details_text"
-        android:layout_below="@+id/movie_detail_header"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@+id/movie_detail_ratingBar"
-        android:layout_toRightOf="@+id/movie_detail_ratingBar"
-        android:paddingBottom="2dp"
-        android:paddingLeft="8dp"
-        android:text="placeholder"
-        />
+        <!--Format for the amount of votes counted to the selected movie, shown in the detail activity-->
+        <TextView
+            android:id="@+id/movie_detail_vote_count"
+            style="@style/movie_details_text"
+            android:layout_below="@+id/movie_detail_header"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/movie_detail_ratingBar"
+            android:layout_toRightOf="@+id/movie_detail_ratingBar"
+            android:paddingBottom="2dp"
+            android:paddingLeft="8dp"
+            android:text="placeholder" />
 
-    <!--Format for the label displaying release date for the selected movie, shown in the detail activity-->
-    <TextView
-        android:id="@+id/movie_detail_release_date_label"
-        style="@style/movie_details_text_bold"
-        android:layout_below="@+id/movie_detail_vote_label"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:paddingBottom="2dp"
-        android:text="Release Date: "
-        />
+        <!--Format for the label displaying release date for the selected movie, shown in the detail activity-->
+        <TextView
+            android:id="@+id/movie_detail_release_date_label"
+            style="@style/movie_details_text_bold"
+            android:layout_below="@+id/movie_detail_vote_label"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:paddingBottom="2dp"
+            android:text="Release Date: " />
 
-    <!--Format for the release date of the selected movie, shown in the detail activity-->
-    <TextView
-        android:id="@+id/movie_detail_release_date"
-        style="@style/movie_details_text"
-        android:layout_below="@+id/movie_detail_vote_label"
-        android:layout_toEndOf="@+id/movie_detail_release_date_label"
-        android:layout_toRightOf="@+id/movie_detail_release_date_label"
-        android:paddingBottom="2dp"
-        android:text="@string/text_placeholder"
-        />
+        <!--Format for the release date of the selected movie, shown in the detail activity-->
+        <TextView
+            android:id="@+id/movie_detail_release_date"
+            style="@style/movie_details_text"
+            android:layout_below="@+id/movie_detail_vote_label"
+            android:layout_toEndOf="@+id/movie_detail_release_date_label"
+            android:layout_toRightOf="@+id/movie_detail_release_date_label"
+            android:paddingBottom="2dp"
+            android:text="@string/text_placeholder" />
 
-    <!--Image placeholder for the trailer button, this can be selected to start trailer.-->
-    <Button
-        android:id="@+id/trailer_button_detail_imageView"
-        style="@style/movie_details_button"
-        android:layout_below="@+id/movie_detail_release_date_label"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:elevation="10dp"
-        android:text="Trailer"
-        android:textAlignment="center" />
+        <!--Image placeholder for the trailer button, this can be selected to start trailer.-->
+        <Button
+            android:id="@+id/trailer_button_detail_imageView"
+            style="@style/movie_details_button"
+            android:layout_below="@+id/movie_detail_release_date_label"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:elevation="10dp"
+            android:text="Trailer"
+            android:textAlignment="center" />
 
-    <!--Image placeholder for the reviews button, this can be selected to start reviews activity.-->
-    <Button
-        android:id="@+id/reviews_button_detail_imageView"
-        style="@style/movie_details_button"
-        android:layout_below="@+id/movie_detail_release_date"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@+id/trailer_button_detail_imageView"
-        android:layout_toRightOf="@+id/trailer_button_detail_imageView"
-        android:elevation="10dp"
-        android:text="Reviews"
-        android:textAlignment="center" />
+        <!--Image placeholder for the reviews button, this can be selected to start reviews activity.-->
+        <Button
+            android:id="@+id/reviews_button_detail_imageView"
+            style="@style/movie_details_button"
+            android:layout_below="@+id/movie_detail_release_date"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/trailer_button_detail_imageView"
+            android:layout_toRightOf="@+id/trailer_button_detail_imageView"
+            android:elevation="10dp"
+            android:text="Reviews"
+            android:textAlignment="center" />
 
-    <!--Format for the overview label of the selected movie, shown in the detail activity-->
-    <TextView
-        android:id="@+id/movie_detail_overview_label"
-        style="@style/movie_details_text_bold"
-        android:layout_below="@+id/trailer_button_detail_imageView"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Overview: "
-        />
+        <!--Format for the overview label of the selected movie, shown in the detail activity-->
+        <TextView
+            android:id="@+id/movie_detail_overview_label"
+            style="@style/movie_details_text_bold"
+            android:layout_below="@+id/trailer_button_detail_imageView"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Overview: " />
 
         <!--Format for the entire overview of the selected movie, shown in the detail activity-->
-    <TextView
-        android:id="@+id/movie_detail_overview"
-        style="@style/movie_details_text"
-        android:layout_below="@+id/movie_detail_overview_label"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/text_placeholder"
-        />
+        <TextView
+            android:id="@+id/movie_detail_overview"
+            style="@style/movie_details_text"
+            android:layout_below="@+id/movie_detail_overview_label"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/text_placeholder" />
 
     </RelativeLayout>
 

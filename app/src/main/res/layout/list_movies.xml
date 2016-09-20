@@ -2,8 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <!--Image design for each movie shown in Gridview-->
     <ImageView
@@ -12,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitXY" />
 
     <!--Text design that appears below each movie image displaying the title-->
     <TextView
@@ -25,12 +24,11 @@
         android:paddingBottom="4dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="8dp"
+        android:paddingTop="4dp"
         android:text="new"
         android:textColor="@android:color/white"
         android:textSize="12sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
 
 </FrameLayout>
