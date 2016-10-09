@@ -93,9 +93,10 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         // The CursorAdapter will take data from our cursor and populate the GridView.
         movieImgAdapter = new MovieImageAdapter(getActivity(), null, 0);
         movieGridview = (GridView) rootView.findViewById(R.id.gridViewMovies);
+        movieGridview.setEmptyView( rootView.findViewById(R.id.emptyView) );
         movieGridview.setAdapter(movieImgAdapter);
 
-        // Listens for when user slects a specific movie
+        // Listens for when user selects a specific movie
         // build the url to be passed in Callback method to the detail fragment
         movieGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -4,7 +4,7 @@
     <string name="app_name">Popular Movies</string>
 
     <!-- API Key for Themoviesdb.org: ENTER API KEY HERE-->
-    <string name="api_Key" translatable="false"></string>
+    <string name="api_Key" translatable="false">355114c318820d5787910ded3fe5a939</string>
 
     <!--Reference string for menu settings name-->
     <string name="action_settings">Settings</string>

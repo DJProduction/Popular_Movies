@@ -7,7 +7,9 @@ import android.preference.PreferenceManager;
 /**
  * Created by JohnsonD on 6/27/16.
  */
-public class MovieUtility {
+final public class MovieUtility {
+
+    private MovieUtility(){}
 
     // Used in the MainActivity to keep track of the preferred sort order by user
     // Helps to have an easy accessible sort value to update the MainActivityFragment's movie gridview

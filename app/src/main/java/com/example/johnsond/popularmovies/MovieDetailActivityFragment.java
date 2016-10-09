@@ -97,6 +97,14 @@ public class MovieDetailActivityFragment extends Fragment implements LoaderManag
     private Button movieTrailerButton;
     private Button movieReviewsButton;
     private ImageButton movieFavoriteButton;
+    /*@BindView(R.id.movie_detail_origional_title_view) TextView movieOrigionalTitleView;
+    @BindView(R.id.movie_detail_imageView) ImageView movieImageView;
+    @BindView(R.id.movie_detail_vote_count) TextView movieVoteCountView;
+    @BindView(R.id.movie_detail_ratingBar) RatingBar movieRatingBarView;
+    @BindView(R.id.movie_detail_release_date) TextView movieReleaseDateView;
+    @BindView(R.id.movie_detail_overview) TextView movieOverviewView;
+    @BindView(R.id.trailer_button_detail_imageView) Button movieTrailerButton;
+    @BindView(R.id.reviews_button_detail_imageView) Button movieReviewsButton;*/
 
 
     public MovieDetailActivityFragment() {
@@ -128,6 +136,7 @@ public class MovieDetailActivityFragment extends Fragment implements LoaderManag
         }
 
         View rootView = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        //ButterKnife.bind(this,rootView);
 
         //  Reference view created at top of class to layout objects by id (fragment_movie_detail)
         movieOrigionalTitleView = (TextView) rootView.findViewById(R.id.movie_detail_origional_title_view);
@@ -150,6 +159,7 @@ public class MovieDetailActivityFragment extends Fragment implements LoaderManag
         });
 
         //Selecting reviews button
+        if(movieReviewsButton == null) {}
         movieReviewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

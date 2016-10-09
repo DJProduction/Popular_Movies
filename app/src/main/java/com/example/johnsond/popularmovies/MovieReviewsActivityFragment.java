@@ -40,7 +40,7 @@ public class MovieReviewsActivityFragment extends Fragment {
 
     private static final String LOG_TAG = MovieReviewsActivityFragment.class.getSimpleName();
     //List of movieItems from FetchMovies() method that will be implemented into the movieImgAdapter
-    ArrayList<MovieReviews> savedListOfMovieReviews = new ArrayList<MovieReviews>();
+    private ArrayList<MovieReviews> savedListOfMovieReviews = new ArrayList<MovieReviews>();
     // Group of references to the values used in each review.
     private MovieReviewsAdapter movieRevAdapter;
     private String id;

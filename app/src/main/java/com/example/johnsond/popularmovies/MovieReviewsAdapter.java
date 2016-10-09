@@ -20,24 +20,42 @@ public class MovieReviewsAdapter extends ArrayAdapter<MovieReviews> {
         super(context, 0, movieReviews);
     }
 
+    // Cache of the children views for the movie gridView item.
+    public static class ViewHolder {
+        private TextView movieAuthorView;
+        private TextView movieReviewView;
+
+    }
+
     // Create a new TextViews containing the author and reviews
     // Inflate the views into the layout
     // For each item referenced from Uri query the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        MovieReviews movieReview = getItem(position);
+
+        ViewHolder viewHolder;
+
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_movie_reviews, parent, false);
+            viewHolder = new ViewHolder();
+            // Searches for the reference in the xml for the format of each review author
+            // Applies the author name for current review contained on the list.
+            viewHolder.movieAuthorView = (TextView) convertView.findViewById(R.id.author_name_textview);
+            // Searches for the reference in the xml for the format of each movie review
+            // Applies the review for current movie contained on the list.
+            viewHolder.movieReviewView = (TextView) convertView.findViewById(R.id.author_review_textview);
+            convertView.setTag(viewHolder);
+        }
+        else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        // Searches for the reference in the xml for the format of each review author
-        // Applies the author name for current review contained on the list.
-        TextView movieAuthorView = (TextView) convertView.findViewById(R.id.author_name_textview);
-        movieAuthorView.setText(movieReview.getAuthor());
+        MovieReviews movieReview = getItem(position);
 
-        // Searches for the reference in the xml for the format of each movie review
-        // Applies the review for current movie contained on the list.
-        TextView movieReviewView = (TextView) convertView.findViewById(R.id.author_review_textview);
-        movieReviewView.setText(movieReview.getReview());
+        //TextView movieAuthorView = (TextView) convertView.findViewById(R.id.author_name_textview);
+        viewHolder.movieAuthorView.setText(movieReview.getAuthor());
+
+        //TextView movieReviewView = (TextView) convertView.findViewById(R.id.author_review_textview);
+        viewHolder.movieReviewView.setText(movieReview.getReview());
 
         return convertView;
     }
